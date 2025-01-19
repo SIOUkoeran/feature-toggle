@@ -3,11 +3,13 @@ package com.example.demo.toggle;
 import com.example.demo.repository.ToggleRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Repository;
 
 import java.util.Map;
 
 @Slf4j
 @Component
+@Repository
 public class FeatureToggleRedisProvider implements FeatureToggleProvider{
 
     private final ToggleRepository toggleRepository;
