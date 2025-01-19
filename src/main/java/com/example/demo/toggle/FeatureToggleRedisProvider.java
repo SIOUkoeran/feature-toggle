@@ -1,21 +1,27 @@
 package com.example.demo.toggle;
 
+import com.example.demo.repository.ToggleRepository;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 
 import java.util.Map;
 
+@Slf4j
 @Component
 public class FeatureToggleRedisProvider implements FeatureToggleProvider{
 
-    private final Map<String, Boolean> featureTogglesMap;
+    private final ToggleRepository toggleRepository;
+    private Map<String, Boolean> featureTogglesMap;
 
-    public FeatureToggleRedisProvider() {
-        this.featureTogglesMap = Map.of();
+
+    public FeatureToggleRedisProvider(ToggleRepository toggleRepository) {
+        this.toggleRepository = toggleRepository;
+        featureTogglesMap = toggleRepository.getToggleMap();
     }
 
+    
     @Override
     public boolean isFeatureEnabled(String feature) {
-        //TODO 해당 기능 상태를 판별하는 로직 구현 필요 #1
-        return false;
+        return featureTogglesMap.get(feature) != null && featureTogglesMap.get(feature);
     }
 }
