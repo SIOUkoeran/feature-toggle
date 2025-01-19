@@ -2,7 +2,7 @@ package com.example.demo.toggle;
 
 import org.springframework.stereotype.Component;
 
-@Component
+
 public class InMemoryFeatureToggleProvider implements FeatureToggleProvider {
 
     @Override
