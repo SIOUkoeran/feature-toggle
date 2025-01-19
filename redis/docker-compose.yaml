@@ -1,0 +1,14 @@
+version: '3.9' # Docker Compose 버전
+services:
+  redis:
+    image: redis:latest # Redis 최신 버전 사용
+    container_name: redis_container # 컨테이너 이름
+    ports:
+      - "6379:6379" # 호스트 포트:컨테이너 포트
+    volumes:
+      - redis_data:/data # 데이터 저장소 볼륨
+    command: ["redis-server", "--appendonly", "yes"] # Redis 설정 커맨드
+
+volumes:
+  redis_data:
+    driver: local
