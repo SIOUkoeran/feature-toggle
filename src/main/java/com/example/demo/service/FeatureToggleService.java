@@ -12,11 +12,11 @@ public interface FeatureToggleService {
      * 채널에 이를 알린다.
      * @return 성공여부
      */
-    boolean publishChangedToggleStatus();
+    boolean publishChangedToggleStatus(FeatureMessageDto featureMessageDto);
 
     /**
      * 레디스 채널을 sub 하여, 수정정보를 전달 받는다.
      * @return 변경 정보 dto
      */
-    FeatureMessageDto subscribeChangedToggleStatus();
+    FeatureMessageDto subscribeChangedToggleStatus(String message, String channel);
 }

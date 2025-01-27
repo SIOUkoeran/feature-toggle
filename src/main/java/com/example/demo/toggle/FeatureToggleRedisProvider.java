@@ -12,12 +12,10 @@ import java.util.Map;
 @Repository
 public class FeatureToggleRedisProvider implements FeatureToggleProvider{
 
-    private final ToggleRepository toggleRepository;
     private Map<String, Boolean> featureTogglesMap;
 
 
     public FeatureToggleRedisProvider(ToggleRepository toggleRepository) {
-        this.toggleRepository = toggleRepository;
         featureTogglesMap = toggleRepository.getToggleMap();
     }
 
@@ -25,5 +23,10 @@ public class FeatureToggleRedisProvider implements FeatureToggleProvider{
     @Override
     public boolean isFeatureEnabled(String feature) {
         return featureTogglesMap.get(feature) != null && featureTogglesMap.get(feature);
+    }
+
+    @Override
+    public void updateFeatureEnabled(String feature, boolean enabled) {
+        featureTogglesMap.put(feature, enabled);
     }
 }

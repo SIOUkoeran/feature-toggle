@@ -1,5 +1,6 @@
 package com.example.demo.config;
 
+import com.example.demo.service.FeatureToggleRedisService;
 import com.example.demo.service.RedisSubscriber;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
@@ -51,8 +52,8 @@ public class RedisConfig {
     }
 
     @Bean
-    public MessageListenerAdapter messageListenerAdapter(RedisSubscriber subscriber) {
-        return new MessageListenerAdapter(subscriber, "onMessage"); // 메시지 처리 메서드 지정
+    public MessageListenerAdapter messageListenerAdapter(FeatureToggleRedisService featureToggleRedisService) {
+        return new MessageListenerAdapter(featureToggleRedisService, "subscribeChangedToggleStatus"); // 메시지 처리 메서드 지정
     }
 
     @Bean

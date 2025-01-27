@@ -11,4 +11,6 @@ public interface FeatureToggleProvider {
      * @return 메서드 활성 여부
      */
     boolean isFeatureEnabled(String feature);
+
+    void updateFeatureEnabled(String feature, boolean enabled);
 }
