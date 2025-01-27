@@ -13,4 +13,7 @@ public class RedisProperties {
     @Value("${config.redis.host:localhost}")
     protected String host;
 
+    @Value("${config.redis.channel.feature:feature}")
+    protected String channelFeature;
+
 }

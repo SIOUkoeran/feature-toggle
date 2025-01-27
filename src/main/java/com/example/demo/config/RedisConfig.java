@@ -1,14 +1,15 @@
 package com.example.demo.config;
 
+import com.example.demo.service.RedisSubscriber;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.redis.connection.RedisConnectionFactory;
 import org.springframework.data.redis.connection.lettuce.LettuceConnectionFactory;
-import org.springframework.data.redis.core.Cursor;
 import org.springframework.data.redis.core.RedisTemplate;
-import org.springframework.data.redis.core.ScanOptions;
-import org.springframework.data.redis.core.StringRedisTemplate;
+import org.springframework.data.redis.listener.ChannelTopic;
+import org.springframework.data.redis.listener.RedisMessageListenerContainer;
+import org.springframework.data.redis.listener.adapter.MessageListenerAdapter;
 import org.springframework.data.redis.serializer.StringRedisSerializer;
 
 @Configuration
@@ -36,5 +37,26 @@ public class RedisConfig {
         redisTemplate.setValueSerializer(new StringRedisSerializer());
 
         return redisTemplate;
+    }
+
+    @Bean
+    public RedisMessageListenerContainer redisMessageListenerContainer(RedisConnectionFactory connectionFactory,
+                                                                       MessageListenerAdapter listenerAdapter) {
+        RedisMessageListenerContainer container = new RedisMessageListenerContainer();
+        container.setConnectionFactory(connectionFactory);
+        container.addMessageListener(
+                listenerAdapter,
+                new org.springframework.data.redis.listener.ChannelTopic(redisProperties.channelFeature));
+        return container;
+    }
+
+    @Bean
+    public MessageListenerAdapter messageListenerAdapter(RedisSubscriber subscriber) {
+        return new MessageListenerAdapter(subscriber, "onMessage"); // 메시지 처리 메서드 지정
+    }
+
+    @Bean
+    public ChannelTopic channelTopic() {
+        return new ChannelTopic(redisProperties.channelFeature);
     }
 }
