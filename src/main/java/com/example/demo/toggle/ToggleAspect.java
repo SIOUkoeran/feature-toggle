@@ -30,8 +30,8 @@ public class ToggleAspect {
 
     @Around(value = "matchAnnotation(toggle)", argNames = "joinPoint, toggle")
     public Object controlMethodByToggle(ProceedingJoinPoint joinPoint, Toggle toggle) throws Throwable {
-        if (featureToggleProvider.isFeatureEnabled(toggle.value())) {
-            log.info("toggle enabled : {}", toggle.value());
+        if (featureToggleProvider.isFeatureEnabled(toggle.featureId())) {
+            log.info("toggle enabled : {}", toggle.featureId());
             return joinPoint.proceed();
         }
         Method method = ((MethodSignature) joinPoint.getSignature()).getMethod();
@@ -40,7 +40,7 @@ public class ToggleAspect {
 
         String fallbackMethodName = toggle.fallbackMethod();
         CheckedSupplier<Object> checkedSupplier = () -> proceed(joinPoint, fallbackMethodName, returnType);
-        return fallbackExecutor.execute(joinPoint, toggle.value(), checkedSupplier);
+        return fallbackExecutor.execute(joinPoint, toggle.featureId(), checkedSupplier);
     }
 
     protected Object proceed(ProceedingJoinPoint joinPoint, String methodName, Class<?> returnType) throws Throwable {

@@ -16,7 +16,6 @@ import java.util.Map;
 public class ToggleRedisRepository implements ToggleRepository{
 
     private final RedisTemplate<String, String> redisTemplate;
-    private final RedisConnectionFactory connectionFactory;
     private final RedisConnectionFactory redisConnectionFactory;
 
     private final static String MATCH_PREFIX = "toggle*";

@@ -4,14 +4,12 @@ import com.example.demo.model.Feature;
 import com.example.demo.repository.ToggleRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
-import org.springframework.stereotype.Repository;
 
 import java.util.List;
 import java.util.Map;
 
 @Slf4j
 @Component
-@Repository
 public class FeatureToggleRedisProvider implements FeatureToggleProvider{
 
     private Map<String, Boolean> featureTogglesMap;
