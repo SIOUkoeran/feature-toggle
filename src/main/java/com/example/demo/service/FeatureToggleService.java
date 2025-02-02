@@ -23,4 +23,6 @@ public interface FeatureToggleService {
     FeatureMessageDto subscribeChangedToggleStatus(String message, String channel);
 
     List<Feature.Toggle> getAllFeature();
+
+    boolean updateToggleFeature(String featureId, boolean enabled);
 }

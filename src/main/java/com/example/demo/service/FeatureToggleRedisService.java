@@ -58,6 +58,19 @@ public class FeatureToggleRedisService implements FeatureToggleService {
         return featureToggleProvider.getAllFeature();
     }
 
+
+    @Override
+    public boolean updateToggleFeature(String featureId, boolean enabled) {
+        String rawRequest = writetoString(new FeatureMessageDto(String.valueOf(enabled), featureId));
+        try {
+            redisPublisher.publish(rawRequest);
+        } catch (Exception e){
+            log.error("FeatureToggleRedisService updateToggleFeature error", e);
+            throw new RuntimeException("FeatureToggleRedisService updateToggleFeature error");
+        }
+        return true;
+    }
+
     protected <T> T convert(String raw, Class<T> clazz) {
         try {
             return objectMapper.readValue(raw, clazz);

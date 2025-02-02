@@ -12,4 +12,10 @@ public record Feature(
             String feature,
             boolean isEnabled
     ){}
+
+    public record UpdateResponse(
+            String featureId,
+            boolean isEnabled
+    ) {
+    }
 }
