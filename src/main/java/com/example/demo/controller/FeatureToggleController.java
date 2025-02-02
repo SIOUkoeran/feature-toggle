@@ -3,7 +3,6 @@ package com.example.demo.controller;
 import com.example.demo.model.Feature;
 import com.example.demo.model.FeatureMessageDto;
 import com.example.demo.service.FeatureToggleService;
-import jakarta.websocket.server.PathParam;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
