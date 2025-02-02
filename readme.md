@@ -1,15 +1,32 @@
-# Feature Toggle 
-> Feature Toggle 구현 데모
->
-## [OVERVIEW]
-### 1. 목표[목표]
-### 2. 구현
+# Feature Toggle Demo Project
 
+A Spring Boot application demonstrating feature toggle implementation using Redis for distributed configuration management.
 
-### 목표
+## Overview
 
-> 코드 변경없이 운영환경에서 시스템의 동작 변경이 가능케 하는 것을 목표로 한다.
-> Feature Flag 
-> 
-> 
+This project implements a feature toggle system that allows dynamic behavior changes in a production environment without code deployment. It uses Redis as a centralized storage for feature flags and implements pub/sub for real-time updates across multiple application instances.
 
+## Features
+
+- Runtime feature flag management
+- Redis-based distributed configuration
+- Annotation-based toggle control (`@Toggle`)
+- Fallback method support
+- Real-time feature updates using Redis pub/sub
+
+## Technical Stack
+
+- Java 23
+- Spring Boot 3.4.1
+- Spring Data Redis
+- Spring AOP
+- Lombok
+- Redis
+
+## Project Structure
+
+### Core Components
+
+1. **Toggle Annotation**
+```java
+@Toggle(featureId = "feature:id", enabled = true, fallbackMethod = "fallbackMethod")
