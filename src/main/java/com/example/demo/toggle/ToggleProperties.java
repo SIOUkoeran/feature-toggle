@@ -1,6 +1,5 @@
 package com.example.demo.toggle;
 
-import lombok.Value;
 import org.springframework.context.annotation.Configuration;
 
 @Configuration

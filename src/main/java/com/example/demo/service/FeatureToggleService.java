@@ -1,8 +1,10 @@
 package com.example.demo.service;
 
+import com.example.demo.model.Feature;
 import com.example.demo.model.FeatureMessageDto;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 public interface FeatureToggleService {
@@ -19,4 +21,6 @@ public interface FeatureToggleService {
      * @return 변경 정보 dto
      */
     FeatureMessageDto subscribeChangedToggleStatus(String message, String channel);
+
+    List<Feature.Toggle> getAllFeature();
 }

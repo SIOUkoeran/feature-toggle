@@ -1,15 +1,16 @@
 package com.example.demo.service;
 
+import com.example.demo.model.Feature;
 import com.example.demo.model.FeatureMessageDto;
 import com.example.demo.toggle.FeatureToggleProvider;
-import com.example.demo.toggle.FeatureToggleRedisProvider;
 import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Slf4j
 @Service
@@ -50,6 +51,11 @@ public class FeatureToggleRedisService implements FeatureToggleService {
         Boolean isEnabled = convert(featureMessageDto.message(), Boolean.class);
         featureToggleProvider.updateFeatureEnabled(featureMessageDto.featureId(), isEnabled);
         return featureMessageDto;
+    }
+
+    @Override
+    public List<Feature.Toggle> getAllFeature() {
+        return featureToggleProvider.getAllFeature();
     }
 
     protected <T> T convert(String raw, Class<T> clazz) {

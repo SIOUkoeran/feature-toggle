@@ -1,7 +1,6 @@
 package com.example.demo.repository;
 
 import lombok.RequiredArgsConstructor;
-import lombok.Value;
 import org.springframework.data.redis.connection.RedisConnection;
 import org.springframework.data.redis.connection.RedisConnectionFactory;
 import org.springframework.data.redis.core.Cursor;
