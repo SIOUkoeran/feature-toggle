@@ -1,6 +1,5 @@
 package com.example.demo.toggle;
 
-import com.example.demo.toggle.functional.CheckedSupplier;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.springframework.stereotype.Component;
 import reactor.core.publisher.Flux;

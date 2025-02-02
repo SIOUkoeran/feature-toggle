@@ -1,6 +1,9 @@
 package com.example.demo.toggle;
 
+import com.example.demo.model.Feature;
 import org.springframework.stereotype.Component;
+
+import java.util.List;
 
 @Component
 public interface FeatureToggleProvider {
@@ -11,4 +14,8 @@ public interface FeatureToggleProvider {
      * @return 메서드 활성 여부
      */
     boolean isFeatureEnabled(String feature);
+
+    void updateFeatureEnabled(String feature, boolean enabled);
+
+    List<Feature.Toggle> getAllFeature();
 }
